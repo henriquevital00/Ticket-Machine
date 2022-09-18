@@ -48,9 +48,11 @@ class Troco {
         }
 
         papeisMoeda[1] = new PapelMoeda(5, count);
+
         count = 0;
-        while (valor % 2 != 0) {
+        while (valor / 2 > 0) {
             count++;
+            valor -= 2;
         }
         papeisMoeda[1] = new PapelMoeda(2, count);
     }
