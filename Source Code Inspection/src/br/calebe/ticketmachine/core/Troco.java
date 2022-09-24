@@ -17,12 +17,10 @@ class Troco {
         int valorPapelMoeda, count;
 
         for (int i = valoresPapelModa.length - 1; i >= 0; i--) {
-            count = 0;
             valorPapelMoeda = valoresPapelModa[i];
-
-            while (valor % valorPapelMoeda != 0) {
-                count++;
-            }
+            
+            count = valor / valorPapelMoeda;
+            valor %= valorPapelMoeda;
 
             papeisMoeda[i] = new PapelMoeda(valorPapelMoeda, count);
         }
