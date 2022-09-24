@@ -12,36 +12,18 @@ class Troco {
 
     public Troco(int valor) {
         papeisMoeda = new PapelMoeda[6];
-        int count = 0;
-        while (valor / 100 > 0) {
-            count++;
+
+        int[] valoresPapelModa = { 2, 5, 10, 20, 50, 100 };
+        int valorPapelMoeda, count;
+
+        for (int i = valoresPapelModa.length - 1; i >= 0; i--) {
+            valorPapelMoeda = valoresPapelModa[i];
+            
+            count = valor / valorPapelMoeda;
+            valor %= valorPapelMoeda;
+
+            papeisMoeda[i] = new PapelMoeda(valorPapelMoeda, count);
         }
-        papeisMoeda[5] = new PapelMoeda(100, count);
-        count = 0;
-        while (valor / 50 > 0) {
-            count++;
-        }
-        papeisMoeda[4] = new PapelMoeda(50, count);
-        count = 0;
-        while (valor / 20 > 0) {
-            count++;
-        }
-        papeisMoeda[3] = new PapelMoeda(20, count);
-        count = 0;
-        while (valor / 10 > 0) {
-            count++;
-        }
-        papeisMoeda[2] = new PapelMoeda(10, count);
-        count = 0;
-        while (valor / 5 > 0) {
-            count++;
-        }
-        papeisMoeda[1] = new PapelMoeda(5, count);
-        count = 0;
-        while (valor / 2 > 0) {
-            count++;
-        }
-        papeisMoeda[1] = new PapelMoeda(2, count);
     }
 
     public Iterator<PapelMoeda> getIterator() {
@@ -58,7 +40,7 @@ class Troco {
 
         @Override
         public boolean hasNext() {
-            for (int i = 6; i >= 0; i++) {
+            for (int i = papeisMoeda.length - 1; i >= 0; i++) {
                 if (troco.papeisMoeda[i] != null) {
                     return true;
                 }
@@ -69,18 +51,14 @@ class Troco {
         @Override
         public PapelMoeda next() {
             PapelMoeda ret = null;
-            for (int i = 6; i >= 0 && ret != null; i++) {
+            for (int i = papeisMoeda.length - 1; i >= 0; i--) {
                 if (troco.papeisMoeda[i] != null) {
                     ret = troco.papeisMoeda[i];
                     troco.papeisMoeda[i] = null;
+                    return ret;
                 }
             }
             return ret;
-        }
-
-        @Override
-        public void remove() {
-            next();
         }
     }
 }
