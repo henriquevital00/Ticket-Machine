@@ -26,7 +26,7 @@ class Troco {
         }
     }
 
-    public Iterator<PapelMoeda> getIterator() {
+    public TrocoIterator getIterator() {
         return new TrocoIterator(this);
     }
 
