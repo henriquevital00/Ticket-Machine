@@ -27,11 +27,11 @@ public class TicketMachineTest {
         "5, 10",
         "10, 20"
     })
-    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int quantia, int valor) throws PapelMoedaInvalidaException 
+    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int saldo, int valor) throws PapelMoedaInvalidaException 
     {
         var sut = new TicketMachine(valor);
+        sut.saldo = saldo;
 
-        sut.inserir(quantia);
         var thrown  = Assertions.catchThrowable(() -> sut.imprimir());
 
         Assertions.assertThat(thrown).isInstanceOf(SaldoInsuficienteException.class);
@@ -61,7 +61,6 @@ public class TicketMachineTest {
         
         sut.inserir(quantia);
         sut.imprimir();
-        
         
         Assertions.assertThat(sut.getSaldo()).isEqualTo(quantia - valorBilhete);
     }
