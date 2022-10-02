@@ -12,11 +12,11 @@ public class TicketMachineTest {
     
     @ParameterizedTest
     @ValueSource(ints = {-2, -5, -10, -20, -50, -100})
-    public void Inserir_DeveLancarExcecaoPapelMoedaInvalida_QuandoInformarPepelMoedaNegativa() 
+    public void Inserir_DeveLancarExcecaoPapelMoedaInvalida_QuandoInformarQuantiaNegativa(int quantia) 
     {
         var sut = new TicketMachine(Mockito.anyInt());
         
-        var thrown  = Assertions.catchThrowable(() -> sut.inserir(-2));
+        var thrown  = Assertions.catchThrowable(() -> sut.inserir(quantia));
 
         Assertions.assertThat(thrown).isInstanceOf(PapelMoedaInvalidaException.class);
     }
@@ -27,11 +27,11 @@ public class TicketMachineTest {
         "5, 10",
         "10, 20"
     })
-    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int quantia, int valor) throws PapelMoedaInvalidaException 
+    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int saldo, int valorBilhete) 
     {
-        var sut = new TicketMachine(valor);
+        var sut = new TicketMachine(valorBilhete);
+        sut.saldo = saldo;
 
-        sut.inserir(quantia);
         var thrown  = Assertions.catchThrowable(() -> sut.imprimir());
 
         Assertions.assertThat(thrown).isInstanceOf(SaldoInsuficienteException.class);
@@ -39,11 +39,11 @@ public class TicketMachineTest {
     
     @ParameterizedTest
     @ValueSource(ints = {2, 5, 10, 20, 50, 100})
-    public void Imprimir_DeveObterSaldoSemCasasDecimais(int quantia) throws SaldoInsuficienteException, PapelMoedaInvalidaException 
+    public void Imprimir_DeveObterSaldoSemCasasDecimais(int saldo) throws SaldoInsuficienteException
     {
         var sut = new TicketMachine(0);
+        sut.saldo = saldo;
 
-        sut.inserir(quantia);
         var resultSaldo = sut.imprimir();
         
         var expectedResult = "*****************\n";
@@ -54,14 +54,13 @@ public class TicketMachineTest {
     
     @ParameterizedTest
     @ValueSource(ints = {2, 5, 10, 20, 50, 100})
-    public void DeveAtualizarERetornarSaldo(int quantia) throws PapelMoedaInvalidaException, SaldoInsuficienteException
+    public void Imprimir_DeveAtualizarSaldo_AposInserirQuantia(int quantia) throws PapelMoedaInvalidaException, SaldoInsuficienteException
     {
         var valorBilhete = 2;
         var sut = new TicketMachine(valorBilhete);
         
         sut.inserir(quantia);
         sut.imprimir();
-        
         
         Assertions.assertThat(sut.getSaldo()).isEqualTo(quantia - valorBilhete);
     }
