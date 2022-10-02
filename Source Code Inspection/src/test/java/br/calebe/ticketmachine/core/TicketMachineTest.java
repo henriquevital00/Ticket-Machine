@@ -12,11 +12,11 @@ public class TicketMachineTest {
     
     @ParameterizedTest
     @ValueSource(ints = {-2, -5, -10, -20, -50, -100})
-    public void Inserir_DeveLancarExcecaoPapelMoedaInvalida_QuandoInformarPepelMoedaNegativa() 
+    public void Inserir_DeveLancarExcecaoPapelMoedaInvalida_QuandoInformarQuantiaNegativa(int quantia) 
     {
         var sut = new TicketMachine(Mockito.anyInt());
         
-        var thrown  = Assertions.catchThrowable(() -> sut.inserir(-2));
+        var thrown  = Assertions.catchThrowable(() -> sut.inserir(quantia));
 
         Assertions.assertThat(thrown).isInstanceOf(PapelMoedaInvalidaException.class);
     }
