@@ -27,7 +27,7 @@ public class TicketMachineTest {
         "5, 10",
         "10, 20"
     })
-    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int saldo, int valor) throws PapelMoedaInvalidaException 
+    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int saldo, int valor) 
     {
         var sut = new TicketMachine(valor);
         sut.saldo = saldo;
@@ -39,7 +39,7 @@ public class TicketMachineTest {
     
     @ParameterizedTest
     @ValueSource(ints = {2, 5, 10, 20, 50, 100})
-    public void Imprimir_DeveObterSaldoSemCasasDecimais(int saldo) throws SaldoInsuficienteException, PapelMoedaInvalidaException 
+    public void Imprimir_DeveObterSaldoSemCasasDecimais(int saldo) throws SaldoInsuficienteException
     {
         var sut = new TicketMachine(0);
         sut.saldo = saldo;
