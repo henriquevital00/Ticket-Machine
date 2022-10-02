@@ -27,9 +27,9 @@ public class TicketMachineTest {
         "5, 10",
         "10, 20"
     })
-    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int saldo, int valor) 
+    public void Imprimir_DeveLancarExcecaoSaldoInsuficiente_QuandoSaldoMenorQueValor(int saldo, int valorBilhete) 
     {
-        var sut = new TicketMachine(valor);
+        var sut = new TicketMachine(valorBilhete);
         sut.saldo = saldo;
 
         var thrown  = Assertions.catchThrowable(() -> sut.imprimir());
