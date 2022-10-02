@@ -54,7 +54,7 @@ public class TicketMachineTest {
     
     @ParameterizedTest
     @ValueSource(ints = {2, 5, 10, 20, 50, 100})
-    public void DeveAtualizarERetornarSaldo(int quantia) throws PapelMoedaInvalidaException, SaldoInsuficienteException
+    public void Imprimir_DeveAtualizarSaldo_AposInserirQuantia(int quantia) throws PapelMoedaInvalidaException, SaldoInsuficienteException
     {
         var valorBilhete = 2;
         var sut = new TicketMachine(valorBilhete);
