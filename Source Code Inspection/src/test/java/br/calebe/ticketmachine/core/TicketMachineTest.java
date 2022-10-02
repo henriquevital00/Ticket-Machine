@@ -39,11 +39,11 @@ public class TicketMachineTest {
     
     @ParameterizedTest
     @ValueSource(ints = {2, 5, 10, 20, 50, 100})
-    public void Imprimir_DeveObterSaldoSemCasasDecimais(int quantia) throws SaldoInsuficienteException, PapelMoedaInvalidaException 
+    public void Imprimir_DeveObterSaldoSemCasasDecimais(int saldo) throws SaldoInsuficienteException, PapelMoedaInvalidaException 
     {
         var sut = new TicketMachine(0);
+        sut.saldo = saldo;
 
-        sut.inserir(quantia);
         var resultSaldo = sut.imprimir();
         
         var expectedResult = "*****************\n";
