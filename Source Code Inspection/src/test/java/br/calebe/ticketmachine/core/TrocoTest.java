@@ -12,8 +12,8 @@ public class TrocoTest {
     @ValueSource(ints = { 2, 5, 10, 20, 50, 100 })
     public void Troco_DeveRetornarQuantidadeUnitaria_QuandoValorIgualAUmaPapelMoeda(int valor)
     {
-        var troco = new Troco(valor);
-        var trocoIterator = troco.getIterator();
+        var sut = new Troco(valor);
+        var trocoIterator = sut.getIterator();
         var quantidadePapelMoeda = 0;
         
         while (trocoIterator.hasNext())
@@ -33,8 +33,8 @@ public class TrocoTest {
     @Test
     public void Troco_InserirNotade527_TestarQuantidadePapelMoedaCorreta()
     {
-        var troco = new Troco(527);
-        var trocoIterator = troco.getIterator();
+        var sut = new Troco(527);
+        var trocoIterator = sut.getIterator();
         var quantidadesReais = new ArrayList<Integer>();
     
         while (trocoIterator.hasNext())
