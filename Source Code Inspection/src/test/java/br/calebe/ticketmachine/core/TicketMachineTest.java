@@ -47,7 +47,7 @@ public class TicketMachineTest {
         var resultSaldo = sut.imprimir();
         
         var expectedResult = "*****************\n";
-        expectedResult += "*** R$ " + sut.getSaldo() + " ****\n";
+        expectedResult += "*** R$ " + sut.getSaldo() + ",00 ****\n";
         expectedResult += "*****************\n";
         Assertions.assertThat(resultSaldo).isEqualTo(expectedResult);
     }
