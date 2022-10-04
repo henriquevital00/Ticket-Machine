@@ -20,6 +20,17 @@ public class TicketMachineTest {
 
         Assertions.assertThat(thrown).isInstanceOf(PapelMoedaInvalidaException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {2, 5, 10, 20, 50, 100})
+    public void Inserir_DeveAtualizarSaldo_QuandoInseridoPapelMoeda(int quantia)
+    {
+        var sut = new TicketMachine(Mockito.anyInt());
+
+        var thrown  = Assertions.catchThrowable(() -> sut.inserir(quantia));
+
+        Assertions.assertThat(sut.getSaldo()).isEqualTo(quantia);
+    }
     
     @ParameterizedTest
     @CsvSource({
