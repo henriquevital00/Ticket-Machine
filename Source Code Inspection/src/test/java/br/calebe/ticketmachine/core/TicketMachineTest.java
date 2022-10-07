@@ -75,4 +75,14 @@ public class TicketMachineTest {
         
         Assertions.assertThat(sut.getSaldo()).isEqualTo(quantia - valorBilhete);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {2, 5, 10, 20, 50, 100})
+    public void GetTroco_DeveRetornarTroco(int quantia)
+    {
+        TicketMachine obj = new TicketMachine(10);
+        var thrown  = Assertions.catchThrowable(() -> obj.inserir(quantia));
+
+        Assertions.assertThat(obj.getTroco()).isEqualTo(obj.saldo - obj.valor);
+    }
 }
